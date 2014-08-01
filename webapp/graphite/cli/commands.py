@@ -12,8 +12,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License."""
 
-import sys, os, urllib, time, traceback, cgi, re, socket
-from cPickle import load,dump
+import urllib, time, traceback, cgi, re, socket
 from itertools import chain
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
@@ -77,7 +76,7 @@ def _create(request,window):
   w = window.replace('.', '_')
   #Basic window creation
   out += "%s_win = new Window('%s_win', {title: '%s',width: 350, height: 225, maximizable: false});\n" % (w,w,w)
-  out += "center = Builder.node( 'center', [Builder.node('img', {id: '%s_img',src: '/content/img/graphite.png'} )] );\n" % w
+  out += "center = Builder.node( 'center', [Builder.node('img', {id: '%s_img',src: '%simg/graphite.png'} )] );\n" % (w, settings.STATIC_URL)
   out += "%s_win.getContent().appendChild( center );\n" % w
   out += "%s_win.setDestroyOnClose();\n" % w
   out += "%s_win.showCenter();\n" % w
